@@ -3,7 +3,7 @@ const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 const routes = require("./controllers/");
-
+require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -11,7 +11,7 @@ const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const sess = {
-  secret: process.env.DB_secret,
+  secret: process.env.DB_SECRET,
   cookie: {},
   resave: false,
   saveUnintialized: true,
@@ -35,4 +35,3 @@ app.use(routes);
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
 });
-0;
